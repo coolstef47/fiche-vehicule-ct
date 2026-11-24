@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maquette Fiche Véhicule VL</title>
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --primary: #0f172a;
+      --primary-hover: #1e293b;
+      --accent-bg: #e2e8f0;
+      --warn-bg: #fef2f2;
+      --warn-border: #fca5a5;
+      --warn-text: #991b1b;
+      --ok-text: #166534;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .app {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      margin: 0 0 4px;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .search-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 2px solid var(--text);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background 0.15s ease;
+    }
+
+    .btn-search {
+      padding: 12px 18px;
+      background: var(--primary);
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .btn-search:hover {
+      background: var(--primary-hover);
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-example {
+      padding: 9px 6px;
+      background: var(--accent-bg);
+      color: var(--text);
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+    }
+
+    .btn-example:hover {
+      background: #cbd5e1;
+    }
+
+    .alert {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      color: var(--warn-text);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .vehicle-banner {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vehicle-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    .vehicle-meta {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+
+    .plate-badge {
+      background: #facc15;
+      color: #0f172a;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      border: 2px solid #0f172a;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-title {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      font-weight: 800;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 6px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .data-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .data-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .data-value {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .tire-list {
+      margin: 0;
+      padding-left: 18px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .tire-list li {
+      margin-bottom: 4px;
+    }
+
+    .field-group {
+      margin-top: 10px;
+    }
+
+    .field-group label {
+      text-transform: none;
+      letter-spacing: normal;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 62px;
+      padding: 9px 10px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      border: 1.5px solid #94a3b8;
+      border-radius: 8px;
+      resize: vertical;
+      color: var(--text);
+      background: #fff;
+    }
+
+    textarea:focus,
+    input[type="text"]:focus {
+      outline: 2px solid #2563eb;
+      outline-offset: 1px;
+    }
+
+    .save-status {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ok-text);
+      min-height: 1.1em;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Aide Contrôle Technique VL — Maquette</h1>
+      <p class="subtitle">Données fictives locales • Repères enregistrés par marque &amp; modèle</p>
+    </header>
+
+    <section class="search-box">
+      <label for="plateInput">Immatriculation du véhicule</label>
+      <div class="search-row">
+        <input
+          id="plateInput"
+          type="text"
+          placeholder="EX: AA-123-BB"
+          autocomplete="off"
+          inputmode="text"
+        />
+        <button id="searchBtn" class="btn-search" type="button">Rechercher</button>
+      </div>
+
+      <div class="examples">
+        <button class="btn-example" type="button" data-plate="AA-123-BB">Exemple 1</button>
+        <button class="btn-example" type="button" data-plate="CC-456-DD">Exemple 2</button>
+        <button class="btn-example" type="button" data-plate="EE-789-FF">Exemple 3</button>
+      </div>
+    </section>
+
+    <div id="alertBox" class="alert hidden" role="alert"></div>
+
+    <main id="resultArea" class="hidden">
+      <div class="vehicle-banner">
+        <div>
+          <p id="vehicleTitle" class="vehicle-title"></p>
+          <div id="vehicleMeta" class="vehicle-meta"></div>
+        </div>
+        <div id="vehiclePlateBadge" class="plate-badge"></div>
+      </div>
+
+      <!-- 1. Dates -->
+      <section class="card">
+        <h2 class="card-title">1. Dates</h2>
+        <div class="grid-2">
+          <div class="data-item">
+            <div class="data-label">1re mise en circulation</div>
+            <div id="dateMec" class="data-value"></div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Date du certificat</div>
+            <div id="dateCert" class="data-value"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Poids & Taille -->
+      <section class="card">
+        <h2 class="card-title">2. Poids &amp; Taille</h2>
+        <div class="grid-2">
+          <div class="data-item">
+            <div class="data-label">Poids à vide (PV)</div>
+            <div id="weightPv" class="data-value"></div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">PTAC</div>
+            <div id="weightPtac" class="data-value"></div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">PTRA</div>
+            <div id="weightPtra" class="data-value"></div>
+          </div>
+          <div class="data-item">
+            <div class="data-label">Longueur / Largeur</div>
+            <div id="sizeDim" class="data-value"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Pneumatiques -->
+      <section class="card">
+        <h2 class="card-title">3. Pneumatiques</h2>
+        <ul id="tireList" class="tire-list"></ul>
+      </section>
+
+      <!-- 4. Repères terrain -->
+      <section class="card">
+        <h2 class="card-title">4. Repères terrain (<span id="reperesModelLabel"></span>)</h2>
+
+        <div class="field-group">
+          <label for="frappeInput">Emplacement frappe à froid</label>
+          <textarea
+            id="frappeInput"
+            placeholder="Ex. : Sous capot, coupelle amortisseur AVD ou plancher sous siège passager..."
+          ></textarea>
+        </div>
+
+        <div class="field-group">
+          <label for="obdInput">Emplacement prise OBD</label>
+          <textarea
+            id="obdInput"
+            placeholder="Ex. : Sous volant à gauche, derrière trappe ou boîte à gants..."
+          ></textarea>
+        </div>
+
+        <div id="saveStatus" class="save-status"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const VEHICLES = {
+      "AA123BB": {
+        plate: "AA-123-BB",
+        brand: "Peugeot",
+        model: "308 II 1.2 PureTech 130",
+        energy: "Essence",
+        mec: "14/03/2018",
+        cert: "22/05/2021",
+        pv: "1 190 kg",
+        ptac: "1 730 kg",
+        ptra: "2 930 kg",
+        length: "4,25 m",
+        width: "1,80 m",
+        tires: [
+          "205/55 R16 91V (monte d'origine)",
+          "225/45 R17 91W (monte optionnelle)"
+        ],
+        defaultFrappe: "Charnière / pied de porte AVD ou traverse sous capot selon millésime (à vérifier sur véhicule).",
+        defaultObd: "Sous la planche de bord à gauche du volant, au-dessus de la commande d'éclairage."
+      },
+      "CC456DD": {
+        plate: "CC-456-DD",
+        brand: "Renault",
+        model: "Captur II 1.0 TCe 100",
+        energy: "Essence / GPL",
+        mec: "09/11/2020",
+        cert: "09/11/2020",
+        pv: "1 235 kg",
+        ptac: "1 742 kg",
+        ptra: "2 942 kg",
+        length: "4,23 m",
+        width: "1,80 m",
+        tires: [
+          "215/60 R17 96H (monte d'origine)",
+          "215/55 R18 95H"
+        ],
+        defaultFrappe: "Pied milieu / passage de roue ou longeron AVD (à confirmer).",
+        defaultObd: "Sous le volant à gauche, dans le rangement inférieur."
+      },
+      "EE789FF": {
+        plate: "EE-789-FF",
+        brand: "Volkswagen",
+        model: "Golf VII 2.0 TDI 150",
+        energy: "Diesel",
+        mec: "03/06/2016",
+        cert: "11/01/2019",
+        pv: "1 354 kg",
+        ptac: "1 910 kg",
+        ptra: "3 510 kg",
+        length: "4,26 m",
+        width: "1,80 m",
+        tires: [
+          "205/55 R16 91V",
+          "225/45 R17 91W"
+        ],
+        defaultFrappe: "Traverse supérieure / tablier compartiment moteur ou pied de porte.",
+        defaultObd: "Sous le tableau de bord côté conducteur, au-dessus du pédalier à gauche."
+      }
+    };
+
+    const STORAGE_PREFIX = "ct_vl_reperes_v1_";
+    let currentModelKey = null;
+    let statusTimeout = null;
+
+    const plateInput = document.getElementById("plateInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const alertBox = document.getElementById("alertBox");
+    const resultArea = document.getElementById("resultArea");
+
+    const vehicleTitle = document.getElementById("vehicleTitle");
+    const vehicleMeta = document.getElementById("vehicleMeta");
+    const vehiclePlateBadge = document.getElementById("vehiclePlateBadge");
+
+    const dateMec = document.getElementById("dateMec");
+    const dateCert = document.getElementById("dateCert");
+
+    const weightPv = document.getElementById("weightPv");
+    const weightPtac = document.getElementById("weightPtac");
+    const weightPtra = document.getElementById("weightPtra");
+    const sizeDim = document.getElementById("sizeDim");
+
+    const tireList = document.getElementById("tireList");
+    const reperesModelLabel = document.getElementById("reperesModelLabel");
+    const frappeInput = document.getElementById("frappeInput");
+    const obdInput = document.getElementById("obdInput");
+    const saveStatus = document.getElementById("saveStatus");
+
+    function normalizePlate(raw) {
+      return (raw || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    }
+
+    function getModelKey(vehicle) {
+      return `${vehicle.brand}__${vehicle.model}`.toLowerCase();
+    }
+
+    function loadReperes(vehicle) {
+      const key = STORAGE_PREFIX + getModelKey(vehicle);
+      try {
+        const saved = localStorage.getItem(key);
+        if (saved) {
+          return JSON.parse(saved);
+        }
+      } catch (e) {
+        // Ignorer les erreurs d'accès au stockage
+      }
+      return {
+        frappe: vehicle.defaultFrappe || "",
+        obd: vehicle.defaultObd || ""
+      };
+    }
+
+    function saveReperes() {
+      if (!currentModelKey) return;
+      const key = STORAGE_PREFIX + currentModelKey;
+      const payload = {
+        frappe: frappeInput.value,
+        obd: obdInput.value
+      };
+      try {
+        localStorage.setItem(key, JSON.stringify(payload));
+        saveStatus.textContent = "Enregistré automatiquement pour ce modèle.";
+        clearTimeout(statusTimeout);
+        statusTimeout = setTimeout(() => {
+          saveStatus.textContent = "";
+        }, 2000);
+      } catch (e) {
+        saveStatus.textContent = "Impossible d'enregistrer en mémoire locale.";
+      }
+    }
+
+    function showError(message) {
+      resultArea.classList.add("hidden");
+      alertBox.textContent = message;
+      alertBox.classList.remove("hidden");
+    }
+
+    function renderVehicle(cleanPlate) {
+      const vehicle = VEHICLES[cleanPlate];
+      if (!vehicle) {
+        showError(
+          `Plaque "${plateInput.value.trim() || "vide"}" non trouvée dans cette maquette. Utilisez l'un des boutons Exemple 1, Exemple 2 ou Exemple 3.`
+        );
+        return;
+      }
+
+      alertBox.classList.add("hidden");
+      resultArea.classList.remove("hidden");
+
+      vehicleTitle.textContent = `${vehicle.brand} ${vehicle.model}`;
+      vehicleMeta.textContent = `Énergie : ${vehicle.energy}`;
+      vehiclePlateBadge.textContent = vehicle.plate;
+
+      dateMec.textContent = vehicle.mec;
+      dateCert.textContent = vehicle.cert;
+
+      weightPv.textContent = vehicle.pv;
+      weightPtac.textContent = vehicle.ptac;
+      weightPtra.textContent = vehicle.ptra;
+      sizeDim.textContent = `${vehicle.length} × ${vehicle.width}`;
+
+      tireList.innerHTML = "";
+      vehicle.tires.forEach((tire) => {
+        const li = document.createElement("li");
+        li.textContent = tire;
+        tireList.appendChild(li);
+      });
+
+      currentModelKey = getModelKey(vehicle);
+      reperesModelLabel.textContent = `${vehicle.brand} ${vehicle.model}`;
+
+      const reperes = loadReperes(vehicle);
+      frappeInput.value = reperes.frappe;
+      obdInput.value = reperes.obd;
+      saveStatus.textContent = "";
+    }
+
+    function handleSearch() {
+      plateInput.value = plateInput.value.toUpperCase().replace(/\s+/g, "");
+      const clean = normalizePlate(plateInput.value);
+      renderVehicle(clean);
+    }
+
+    searchBtn.addEventListener("click", handleSearch);
+
+    plateInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        handleSearch();
+      }
+    });
+
+    plateInput.addEventListener("input", () => {
+      plateInput.value = plateInput.value.toUpperCase().replace(/\s+/g, "");
+    });
+
+    document.querySelectorAll(".btn-example").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const plate = btn.getAttribute("data-plate");
+        plateInput.value = plate;
+        renderVehicle(normalizePlate(plate));
+      });
+    });
+
+    frappeInput.addEventListener("input", saveReperes);
+    obdInput.addEventListener("input", saveReperes);
+
+    // Charger Exemple 1 au démarrage pour voir immédiatement l'écran
+    plateInput.value = "AA-123-BB";
+    renderVehicle("AA123BB");
+  </script>
+</body>
+</html>
